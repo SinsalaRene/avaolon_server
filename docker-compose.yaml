@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  avorion:
+    container_name: avorion
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "27000:27000"
+      - "27003:27003/udp"
+      - "27020:27020/udp"
+      - "27021:27021/udp"
+    environment:
+      - ADMIN
+      - GALAXYNAME
+      # Volumes store your data between container upgrades
+    volumes:
+      - './server-files:/home/steam/.avorion'
+    restart: unless-stopped # Recommended but not required (DHCP needs NET_ADMIN)  
